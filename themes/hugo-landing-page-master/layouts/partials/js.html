@@ -1,0 +1,89 @@
+<script src="https://unpkg.com/popper.js@1"></script>
+<script src="https://unpkg.com/tippy.js@4"></script>
+<script>
+
+    function navToggle() {
+        let btn = document.getElementById('menuBtn');
+        let nav = document.getElementById('menu');
+
+        btn.classList.toggle('open');
+        nav.classList.toggle('flex');
+        nav.classList.toggle('hidden');
+    }
+
+    window.addEventListener('scroll', function() {
+
+        let btt = document.getElementById('btt');
+
+        if (window.scrollY >= 1080) {
+            btt.classList.remove('hidden');
+            btt.classList.add('block');
+        } else {
+            btt.classList.add('hidden');
+            btt.classList.remove('block');
+        }
+
+    });
+
+    console.log('Code/Design: ttntm.me'); // credit where credit is due
+
+    const template = document.getElementById('followTip');
+    const container = document.createElement('div');
+
+    container.appendChild(document.importNode(template.content, true));
+
+    tippy('#follow', {
+        content: container.innerHTML,
+        animation: 'scale',
+        duration: 250,
+        arrow: true,
+        placement: 'bottom',
+        interactive: true,
+    })
+
+</script>
+<script>
+    document.getElementById('registration-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    var debug = true;  // debug flag
+    
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var organisation = document.getElementById('organisation').value;
+    var website = document.getElementById('website').value;
+    var comment = document.getElementById('comment').value;
+    
+    if(debug)	{
+    	console.log(name); // debug only
+    	console.log(email); // debug only
+    	console.log(organisation); // debug only
+    	console.log(website); // debug only
+    	console.log(comment); // debug only
+		}
+    // Prepare the data
+    var data = {
+        "Name": name,
+        "Notes": comment,
+        "Email": email,
+        "Active": true, // Assuming this is a required field
+        // Add only if the fields are not empty
+        ...(organisation && {"Organisation": organisation}),
+        ...(website && {"website": website})
+    };
+	   if(debug)	{console.log("data");} // debug only
+	   
+    // AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.baserow.io/api/database/rows/table/260776/?user_field_names=true", true);
+    xhr.setRequestHeader("Authorization", "Token 4Rf73U4LhPWHfV1040IM4zBaAsJOtLnf");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Data submitted successfully");
+            // Handle response here
+        }
+    };
+    xhr.send(JSON.stringify(data));
+});
+</script>

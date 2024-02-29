@@ -1,0 +1,65 @@
+{{ $headless := .Site.GetPage "/sections" }}
+{{ $reg := $headless.Resources.GetMatch (printf "*%s*" "respond") }}
+
+<div id="respond" class="w-full min-h-screen flex flex-col justify-center items-center bg-gray-800">
+    <div class="self-center text-center w-full xl:w-1/3 px-4 sm:px-0">
+        <h2 class="font-bold tracking-widest text-gray-200 text-4xl mb-4">{{ $reg.Title }}</h2>
+        <div class="font-light text-gray-400 text-xl">
+            {{ $reg.Content }}
+        </div>
+        <a href="https://forms.gle/ohm1CzwvcYyCALPd8" onclick="event.preventDefault(); window.location=this.href;">
+    <button class="flex-shrink-0 bg-pink-600 border-pink-600 hover:bg-gray-800 hover:text-pink-600 border text-gray-200 py-2 px-4">
+        Take me to the Survey!
+    </button>
+</a>
+        <a class="font-light text-gray-200 text-lg"><br><br>If you don't want to do the survey, but would like to be kept up-to-date, use this form - add your organisation named / website and anything you'd like to say, and we'll let you know as we progress.</a>
+        <!-- form -->
+        <form class="w-full max-w-lg my-20 mx-auto" action="#" method="post" id="registration-form" target="_blank" validate>
+        	<div class="flex flex-col gap-4">
+        
+         		<!-- name -->
+         		<div class="flex items-center border-b border-pink-600 py-2">
+         			<label class="font-light text-gray-200 text-xl flex-shrink-0 w-1/3" for="name">Your name (required):</label>
+                	<input class="appearance-none bg-transparent border border-transparent w-full text-gray-200 focus:outline-none focus:bg-gray-400 focus:text-gray-800 focus:border-gray-400 mr-3 py-2 px-3" type="text" value="" id="name" name="NAME" placeholder="Your name" aria-label="Name" required>                
+            	</div>
+            
+         		<!-- email -->
+         		<div class="flex items-center border-b border-pink-600 py-2">
+         			<label class="font-light text-gray-200 text-xl flex-shrink-0 w-1/3"  for="email">Your email address (required):</label>
+                	<input class="appearance-none bg-transparent border border-transparent w-full text-gray-200 focus:outline-none focus:bg-gray-400 focus:text-gray-800 focus:border-gray-400 mr-3 py-2 px-3" type="email" value="" id="email"  name="EMAIL" placeholder="me@org.com" aria-label="Email Address" required>
+            	</div>
+            
+         		<!-- organisation -->
+         		<div class="flex items-center border-b border-pink-600 py-2">
+         			<label class="font-light text-gray-200 text-xl flex-shrink-0 w-1/3"  for="organisation">Your Organisation (Optional):</label>
+                	<input class="appearance-none bg-transparent border border-transparent w-full text-gray-200 focus:outline-none focus:bg-gray-400 focus:text-gray-800 focus:border-gray-400 mr-3 py-2 px-3" type="text" value=""  id="organisation"  name="ORGANISATION" placeholder="My Organisation/Affiliation" aria-label="Organisation">
+            	</div>
+            
+         		<!-- website -->
+         		<div class="flex items-center border-b border-pink-600 py-2">
+         			<label class="font-light text-gray-200 text-xl flex-shrink-0 w-1/3"  for="website">Website (Optional, needs http://):</label>
+                	<input class="appearance-none bg-transparent border border-transparent w-full text-gray-200 focus:outline-none focus:bg-gray-400 focus:text-gray-800 focus:border-gray-400 mr-3 py-2 px-3" type="url" value=""  id="website"  name="WEBSITE" placeholder="web address" aria-label="Organisation">
+            	</div>
+            
+         		<!-- comment -->
+         		<div class="flex items-center border-b border-pink-600 py-2">
+         			<label class="font-light text-gray-200 text-xl flex-shrink-0 w-1/3"  for="website">Comment (Optional):</label>
+                	<input class="appearance-none bg-transparent border border-transparent w-full text-gray-200 focus:outline-none focus:bg-gray-400 focus:text-gray-800 focus:border-gray-400 mr-3 py-2 px-3" type="text" value=""  id="comment"  name="COMMENT" placeholder="Your comment" aria-label="Comment">
+            	</div>
+            </div>
+            <!-- privacy statement -->
+            <label class="block text-gray-200 text-left px-2 mt-4" for="gdpr_37169">
+                <input class="leading-tight" type="checkbox" id="gdpr_37169" name="gdpr[37169]" value="Y" required>
+                <span class="text-md font-light">
+                    I agree with the <a href="/privacy" class="underline hover:no-underline hover:text-pink-600" title="Privacy Policy" target="_blank">Privacy Policy</a><br>
+                </span>
+            </label>
+         	<!-- submit button -->            
+            <button class="flex-shrink-0 bg-pink-600 border-pink-600 hover:bg-gray-800 hover:text-pink-600 border text-gray-200 py-2 px-4" type="submit" name="subscribe">
+                    Submit my details
+            </button>
+            
+         	
+        </form>
+    </div>
+</div>
